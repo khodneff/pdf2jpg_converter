@@ -52,7 +52,7 @@ async def handle_docs_photo(message):
 
         suffix = Path(r'files/' + message.document.file_name).suffix
 
-        if suffix == '.jpg' or suffix == '.png' or suffix == '.jpeg':
+        if suffix.lower() == '.jpg' or suffix == '.png' or suffix == '.jpeg':
             print('converting...')
             convert_to_pdf('files/' + message.document.file_name)
             # convert_to_pdf('files/' + message.document.file_name)
