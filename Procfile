@@ -1,1 +1,1 @@
-web: gunicorn pdf2jpgconverter.wsgi
+worker: python bot.py 0.0.0.0:$PORT
