@@ -1,1 +1,1 @@
-build-essential libpoppler-cpp-dev pkg-config python3-dev
+poppler-utils
