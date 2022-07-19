@@ -14,7 +14,7 @@ start_keyboard.add(types.KeyboardButton('Старт'))
 
 
 def convert_to_jpg(path: str, user_dir: str):
-    images = convert_from_path(path, poppler_path=r'poppler-22.04.0\Library\bin')
+    images = convert_from_path(path)
 
     for i in range(len(images)):
         # Save pages as images in the pdf
