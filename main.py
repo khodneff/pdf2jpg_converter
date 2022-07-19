@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from pdf2image import convert_from_path
 import shutil
 
-TOKEN = '5466538708:AAEzXYDsVc-j4m5duBrQQrZCO3EdIR41f3U'
+TOKEN = '5456172152:AAG2-z_6E9FzYjCe7atzoX-m1eqQ77fAK5k'
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 start_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
