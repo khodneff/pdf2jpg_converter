@@ -49,7 +49,7 @@ async def handle_docs_photo(message):
                     with open(file, 'rb') as doc:
                         await message.reply_document(doc)
 
-            elif suffix == '.pdf':
+            elif suffix.lower() == '.pdf':
                 print('converting...')
                 convert_to_jpg(from_user + message.document.file_name, for_user)
 
