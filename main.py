@@ -1,30 +1,16 @@
 import os
 from pathlib import Path
 import glob
-import img2pdf
 from aiogram import Bot, Dispatcher, executor, types
-from pdf2image import convert_from_path
 import shutil
+from secrets import TOKEN
+from converter import convert_to_pdf, convert_to_jpg
 
-TOKEN = '5456172152:AAG2-z_6E9FzYjCe7atzoX-m1eqQ77fAK5k'
+
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 start_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 start_keyboard.add(types.KeyboardButton('Старт'))
-
-
-def convert_to_jpg(path: str, user_dir: str):
-    images = convert_from_path(path)
-
-    for i in range(len(images)):
-        # Save pages as images in the pdf
-        images[i].save(user_dir + 'page' + str(i) + '.jpg', 'JPEG')
-
-
-def convert_to_pdf(path_to_file: str, user_dir: str):
-    with open(user_dir + os.path.splitext(os.path.basename(path_to_file))[0] + '.pdf', 'wb') as f:
-        f.write(img2pdf.convert(path_to_file))
-        f.close()
 
 
 @dp.message_handler(content_types=['document', 'photo', 'text'])
@@ -58,19 +44,18 @@ async def handle_docs_photo(message):
             if suffix.lower() == '.jpg' or suffix == '.png' or suffix == '.jpeg':
                 print('converting...')
                 convert_to_pdf(from_user + message.document.file_name, for_user)
-                # convert_to_pdf('files/' + message.document.file_name)
+
                 for file in glob.glob(for_user + '*'):
-                    doc = open(file, 'rb')
-                    await message.reply_document(doc)
-                    doc.close()
+                    with open(file, 'rb') as doc:
+                        await message.reply_document(doc)
 
             elif suffix == '.pdf':
                 print('converting...')
                 convert_to_jpg(from_user + message.document.file_name, for_user)
+
                 for file in glob.glob(for_user + '*'):
-                    doc = open(file, 'rb')
-                    await message.reply_document(doc)
-                    doc.close()
+                    with open(file, 'rb') as doc:
+                        await message.reply_document(doc)
 
             else:
                 await bot.send_message(chat_id, 'Неверный формат файла')
