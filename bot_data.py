@@ -1,1 +1,1 @@
-TOKEN = '5456172152:AAG2-z_6E9FzYjCe7atzoX-m1eqQ77fAK5k'
+TOKEN = 'токен телеграм бота'
