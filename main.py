@@ -3,7 +3,7 @@ from pathlib import Path
 import glob
 from aiogram import Bot, Dispatcher, executor, types
 import shutil
-from secrets import TOKEN
+from bot_data import TOKEN
 from converter import convert_to_pdf, convert_to_jpg
 
 
